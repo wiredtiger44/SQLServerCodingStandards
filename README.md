@@ -22,51 +22,53 @@ Coding standards for SQL Server development
 
     ```code
     /* bad  */
-    if (bnftPlanType == "Medical Plan")
-    {
-    }
+    SELECT	BnftPlan.BnftPlanSK
+		FROM	BnftPlan
+		WHERE	BnftPlan.LOBSK = 2
     
     /* good */
-    string benefitPlanTypeMedical = "Medical Plan";
-    if (bnftPlanType == benefitPlanTypeMedical)
-    {
-    }
+    DECLARE @LobSK BIGINT
+    SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
+    
+    SELECT	BnftPlan.BnftPlanSK
+		FROM	BnftPlan
+		WHERE	BnftPlan.LOBSK = @LobSK
     ```
-<a name="AvoidLongMethods"></a><a name="1.3"></a>
-  - [1.3](#AvoidLongMethods) **Avoid Long Methods**: Avoid writing really long methods. 
-
-    > Why? If a method is getting large, it probably is doing too much and/or multiple things.  Consider refactoring into separate methods. 
     
-    <a name="OneFileOneClass"></a><a name="1.4"></a>
-  - [1.4](#OneFileOneClass) **One File One Class**: Do not have more than one class in a single file
-
-    > Why? This is a standard that has been adopted by the team. Makes source control easier to manage (a check out in one file has less impact).  Easier to find class without having to know file.
-    
-      <a name="ControllersShouldBeFocused"></a><a name="1.5"></a>
-  - [1.5](#ControllersShouldBeFocused) **Focused Controllers**: Controllers should have a focus and not reference various things.  For example:  The PharmacyTypesController should only be focused on PharmacyTypes.
-
-    > Why? A standard that has been adopted in the industry for API architecture. 
-
-  <a name="InvalidParameters"></a><a name="1.6"></a>
+    <a name="InvalidParameters"></a><a name="1.6"></a>
   - [1.5](#InvalidParameters) **Invalid Parameters**: Handle invalid parameter values early in methods.
 
     > Why? The sooner a bad parameter is handled the less risk that the bad paramater could cause harm in the code.
     
      ```code
     /* bad - invalid parameter is not handled */
-    public string GetBenefitPlanTotal(long benefitPlanSubtotal)
-    {
-      return benefitPlanSubtotal;
-    }
+    ALTER Procedure [dbo].[spBenefitPlanSearch] @BnftPlanSK BIGINT= NULL
+
+    AS
+    BEGIN
+
+    SELECT	
+				BnftPlan.BnftPlanSK
+				,BnftPlan.BnftPlanID
+				,BnftPlan.BnftPlanName
+		FROM	BnftPlan
+		WHERE	BnftPlan.BnftPlanSK = @BnftPlanSK
     
     /* good - invalid parameter is handled */
-    public string GetBenefitPlanTotal(long benefitPlanSubtotal)
-    {
-          if(benefitPlanSubtotal < 0)
-          {
-              return BadRequest("Subtotal should be a positive number");
-          }
-    }
+    ALTER Procedure [dbo].[spBenefitPlanSearch] @BnftPlanSK BIGINT= NULL
+
+    AS
+    BEGIN
+
+    IF (@BnftPlanSK IS NOT NULL)
+    BEGIN
+      SELECT	
+          BnftPlan.BnftPlanSK
+          ,BnftPlan.BnftPlanID
+          ,BnftPlan.BnftPlanName
+      FROM	BnftPlan
+      WHERE	BnftPlan.BnftPlanSK = @BnftPlanSK
+    END
     ```
 
 ## Error Handling
