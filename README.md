@@ -133,18 +133,20 @@ Coding standards for SQL Server development
     ```
 
 <a name="StoredProcedureNames"></a><a name="3.3"></a>
-  - [3.3](#StoredProcedureNames) **Stored Procedure Names**: Stored Procedure names should be prefixed with "sp". Don't start procedures with "sp_".
+  - [3.3](#StoredProcedureNames) **Stored Procedure Names**: Stored Procedure names should be prefixed with "sp" (no underscore). Names should start with main table or object being referenced in rpcedure. 
 
-    > Why? Standardizing class names helps differentiate them from other types of objects. 
+    > Why? Standardizing ames helps differentiate them from other types of objects. 
 
     ```code
-    /* bad - name is not Pascal case, is a verb and does not match file name. */
-    In file exporting.cs
-    public class exportingdownloading
+    /* bad - name does not start with sp. Doesn't reference main table */
     
-    /* good - name is Pascal case, is a noun and matches file name. */
-    In file BenefitPlan.cs
-    public class BenefitPlan
+     ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
+    
+    /* good - name does start with sp. Does reference main table */
+    ALTER Procedure [dbo].[spBenefitPlanSearch] @BnftPlanSK BIGINT= NULL
+    
+    /* good - name does start with spReport for a report only stored proceudre. Does reference main table */
+    ALTER Procedure [dbo].[spReportBenefitPlan] @BnftPlanSK BIGINT= NULL
     ```
     
     <a name="Method names"></a><a name="3.4"></a>
