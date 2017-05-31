@@ -149,21 +149,17 @@ Coding standards for SQL Server development
     ALTER Procedure [dbo].[spReportBenefitPlan] @BnftPlanSK BIGINT= NULL
     ```
     
-    <a name="Method names"></a><a name="3.4"></a>
-  - [3.4](#methodNames) **Method Names**: Use Pascal casing for Method Names.  Method names should start with a verb and tell what it does. 
+    <a name="Function names"></a><a name="3.4"></a>
+  - [3.4](#functionNames) **Function Names**: Functions should be prefixed with “fn” (no underscore). They should start with a verb.  
 
     > Why? Standardizing method names helps differentiate them from other types of objects. 
 
     ```code
-    /* bad - name is not Pascal case and does not start with verb */
-    public string benefitPlan(long benefitPlanSK)
-    {
-    }
+    /* bad - name does not start with fn and does not start with verb */
+   ALTER FUNCTION [dbo].[Split] 
     
-    /* good - name is Pascal case and start with verb */
-    public string GetBenefitPlan(long benefitPlanSK)
-    {
-    }
+    /* good - name does start with fn and does start with verb */
+   ALTER FUNCTION [dbo].[fnSplitString] 
     ```
     
       <a name="Variable and Parameter names"></a><a name="3.5"></a>
