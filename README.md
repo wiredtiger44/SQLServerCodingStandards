@@ -104,49 +104,19 @@ Coding standards for SQL Server development
 		SELECT	ERROR_NUMBER() AS ErrorNumber,ERROR_MESSAGE() AS ErrorMessage; 
 	END CATCH;
     ```
-
-<a name="TryCatchForController"></a><a name="2.2"></a>
-  - [2.2](#TryCatchForController) **Use Try Catch in Controllers**: Use try/catch at the controller level so exceptions bubble up correctly. 
-
-    > Why? Errors that are bubbled up to the controller need to be converted into API return codes (OK, Bad Message) in order to work correctly.
-
-    ```code
-    /* bad (error is thrown and not converted) */
-    return Ok(_dataCompareAtlasBLL.ComparePlan(bnftPlanSK1, bnftPlanSK2));
     
-    /* good - error is bubbled up to higher level */
-    try
-    {
-        return Ok(_dataCompareAtlasBLL.ComparePlan(bnftPlanSK1, bnftPlanSK2));
-    }
-    catch (Exception ex)
-    {
-        return BadRequest(_exceptionResponseGenerator.GetExceptionMessage(ex));
-    }
-    ```
-
-<a name="DetailedErrorMessages"></a><a name="2.3"></a>
-  - [2.3](#DetailedErrorMessages) **Detailed Error Messages**: Error messages should provide enough detail so that the user knows what the problem is and can identify the record causing the problem.
-
-    > Why? Errors that aren't detailed confuse users and can make applications hard to debug.
-    
-<a name="ErrorMessagesSecurity"></a><a name="2.4"></a>
-  - [2.4](#ErrorMessagesSecurity) **Error Message Security**: Care should be taken to make sure Error messages don't contain information that could be helpful in breaking security.
-
-    > Why? Providing too much detail or specific information in an error is a security concern.  Limit the amount of detail displayed in a message for privacy.  Limit the type of information provided based on environment.  For example, more in Dev, less in Prod.
-
 ## Naming Conventions
 <a name="Meaningful Names"></a><a name="3.1"></a>
-  - [3.1](#meaningfulNames) **Meaningful Names**: Use meaningful Names to describe constants, variables, and methods.
+  - [3.1](#meaningfulNames) **Meaningful Names**: Use meaningful Names to describe constants, variables, and methods. Don't use names that resemble keywords.
 
     > Why? Meaningful names help other developers quickly look at the code and understand the functionality. 
 
     ```code
-    /* bad - name is not meaningful */
-    string mmm = "Medical Plan";
+    /* bad - name is not meaningful. resembles a keyword. */
+    DECLARE  @varcharString varchar(25) = "Medical plan";
     
     /* good - name is representative of the variables representation */
-    string benefitPlanTypeMedical = "Medical Plan";
+    DECLARE @benefitPlanTypeMedical varchar(25) = "Medical Plan";
     ```
  <a name="Single character variables"></a><a name="3.2"></a>
   - [3.2](#singlecharacter) **No Single Character Variables**: Use meaningful Names to describe variables. Use of one character variables should be limited to loops
@@ -155,20 +125,15 @@ Coding standards for SQL Server development
 
     ```code
     /* bad - name is not meaningful */
-    string m="Medical plan";
+    DECLARE  @m varchar(25) = "Medical plan";
     
     /* good - name is representative of the variables representation */
-    string benefitPlanTypeMedical = "Medical Plan";
-    
-    /* good - single character used in loop */
-    for (int i = 0; i < length; i++)
-    {
-        
-    }
+    DECLARE @benefitPlanTypeMedical varchar(25) = "Medical Plan";
+
     ```
 
-<a name="Class names"></a><a name="3.3"></a>
-  - [3.3](#ClassNames) **Class Names**: Class names should use pascal casing. Class Names should be nouns. ClassNames should match file name.
+<a name="StoredProcedureNames"></a><a name="3.3"></a>
+  - [3.3](#StoredProcedureNames) **Stored Procedure Names**: Stored Procedure names should be prefixed with "sp". Don't start procedures with "sp_".
 
     > Why? Standardizing class names helps differentiate them from other types of objects. 
 
