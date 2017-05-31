@@ -35,8 +35,8 @@ Coding standards for SQL Server development
 		WHERE	BnftPlan.LOBSK = @LobSK
     ```
     
-    <a name="InvalidParameters"></a><a name="1.6"></a>
-  - [1.5](#InvalidParameters) **Invalid Parameters**: Handle invalid parameter values early in methods.
+    <a name="InvalidParameters"></a><a name="1.3"></a>
+  - [1.3](#InvalidParameters) **Invalid Parameters**: Handle invalid parameter values early in methods.
 
     > Why? The sooner a bad parameter is handled the less risk that the bad paramater could cause harm in the code.
     
@@ -79,16 +79,30 @@ Coding standards for SQL Server development
 
     ```code
     /* bad (error is suppressed) */
-    try
-    {
-        return ExportBenefitPlan(bnftPlanSK, planPgmCode);
-    }
-    catch (Exception ex)
-    {
-    }    
+    BEGIN TRY
+       SELECT	
+          BnftPlan.BnftPlanSK
+          ,BnftPlan.BnftPlanID
+          ,BnftPlan.BnftPlanName
+      FROM	BnftPlan
+      WHERE	BnftPlan.BnftPlanSK = @BnftPlanSK
+    END TRY
+    BEGIN CATCH;
+	BREAK;
+    END CATCH;
     
-    /* good - error is bubbled up to higher level */
-    return ExportBenefitPlan(bnftPlanSK, planPgmCode);
+    	/* good - error is bubbled up to higher level */
+	BEGIN TRY
+		SELECT	
+			BnftPlan.BnftPlanSK
+			,BnftPlan.BnftPlanID
+			,BnftPlan.BnftPlanName
+		FROM	BnftPlan
+		WHERE	BnftPlan.BnftPlanSK = @BnftPlanSK
+	END TRY
+	BEGIN CATCH  
+		SELECT	ERROR_NUMBER() AS ErrorNumber,ERROR_MESSAGE() AS ErrorMessage; 
+	END CATCH;
     ```
 
 <a name="TryCatchForController"></a><a name="2.2"></a>
