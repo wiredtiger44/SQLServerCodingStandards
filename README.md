@@ -108,7 +108,7 @@ Coding standards for SQL Server development
 	BREAK;
     END CATCH;
     
-    	/* good - error is bubbled up to higher level */
+	/* good - error is bubbled up to higher level */
 	BEGIN TRY
 		SELECT	
 			BnftPlan.BnftPlanSK
@@ -141,7 +141,7 @@ Coding standards for SQL Server development
     > Why? Meaningful names help other developers quickly look at the code and understand the functionality. 
 
     ```code
-    /* bad - name is not meaningful */
+    /* bad - name is a single character */
     DECLARE  @m varchar(25) = "Medical plan";
     
     /* good - name is representative of the variables representation */
@@ -156,7 +156,6 @@ Coding standards for SQL Server development
 
     ```code
     /* bad - name does not start with sp. Doesn't reference main table */
-    
      ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
     
     /* good - name does start with sp. Does reference main table */
