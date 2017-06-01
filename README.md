@@ -307,6 +307,20 @@ Coding standards for SQL Server development
 		SELECT Id FROM XType
 	END
 	```
+	
+	<a name="UpperCaseKeyword"></a><a name="4.7"></a>
+  - [4.7](#upperCaseKeyword) **UPPER CASE for SQL Keywords**: All SQL Keywords should be in all UPPER CASE letters.
+
+    > Why? Helps organize what is going on in the object. Makes it easy to distinguish keywords versus user supplied items.
+
+     ```code
+     /* bad - lower case keywords */
+    alter Procedure [dbo].[Search] @BnftPlanSK bigint= null
+    
+    
+    /* good - Upper Case keywords */
+    ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
+    
 ## Commenting
 <a name="CleanReadableCodeLessComments"></a><a name="5.1"></a>
   - [5.1](#CleanReadableCodeLessComments) **Clean Readable Code Less Comments**: Write clean, readable, code in such a way that it doesn’t need comments to understand.
