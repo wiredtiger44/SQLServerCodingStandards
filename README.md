@@ -240,10 +240,29 @@ Coding standards for SQL Server development
 	```
 
 <a name="RemoveUnusedCode"></a><a name="4.5"></a>
-  - [4.6](#RemoveUnusedCode) **Remove Unused Code**: Code that is no longer used should be removed. Unused references should be cleaned up.
+  - [4.5](#RemoveUnusedCode) **Remove Unused Code**: Code that is no longer used should be removed. Unused references should be cleaned up.
 
     > Why? Code that no longer is used still may need to be maintained. Less confusion if code is removed.
     
+    <a name="BeginEndAtSameLevel"></a><a name="4.6"></a>
+  - [4.6](#beginEndAtSameLevel) **BEGIN and END should be at same level**: BEGIN and END should be in the same level as the code outside the section.
+  
+	> Why? It saves a level of indenting. Complex SQL code can get unwieldy with too many levels.
+    
+	```code
+	/* bad - BEGIN END on different level */
+	IF (x=1)
+		BEGIN
+			SELECT Id FROM XType
+		END
+
+
+	/* good - BEGIN END on same level */
+	IF (x=1)
+	BEGIN
+		SELECT Id FROM XType
+	END
+	```
 ## Commenting
 <a name="CleanReadableCodeLessComments"></a><a name="5.1"></a>
   - [5.1](#CleanReadableCodeLessComments) **Clean Readable Code Less Comments**: Write clean, readable, code in such a way that it doesn’t need comments to understand.
