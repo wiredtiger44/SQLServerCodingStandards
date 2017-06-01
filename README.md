@@ -114,7 +114,22 @@ Coding standards for SQL Server development
 	
     ```
     
+<a name="KeyValuesOnce"></a><a name="1.6"></a>
+  - [1.6](#KeyValuesOnce) **Key Values outside of Select**: Key Values when appropriate should be determined once at the top and then used in the Select.
 
+    > Why? Easier and more efficient to do it once at the top instead of at every row.
+
+     ```code
+     /* bad - key value in select */
+    SELECT 	GetDate(), BenefitPlanName
+    FROM	BenefitPlan
+    
+    
+    /* good - key value not in select */
+    DECLARE @CurrentDate as DateTime = GetDate()
+    SELECT 	@CurrentDate, BenefitPlanName
+    FROM	BenefitPlan
+    ```
     
 ## Error Handling
 <a name="swallowException"></a><a name="2.1"></a>
