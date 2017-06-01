@@ -133,7 +133,7 @@ Coding standards for SQL Server development
     ```
 
 <a name="StoredProcedureNames"></a><a name="3.3"></a>
-  - [3.3](#StoredProcedureNames) **Stored Procedure Names**: Stored Procedure names should be prefixed with "sp" (no underscore). Names should start with main table or object being referenced in rpcedure. 
+  - [3.3](#storedProcedureNames) **No Single Character Variables**: Stored Procedure names should be prefixed with "sp" (no underscore). Names should start with main table or object being referenced in rpcedure. 
 
     > Why? Standardizing ames helps differentiate them from other types of objects. 
 
