@@ -87,6 +87,34 @@ Coding standards for SQL Server development
     ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
     
     ```
+<a name="HistoryHeader"></a><a name="1.5"></a>
+  - [1.5](#historyHeader) **Include a History Header**: A history header should be added at the top of every object.
+
+    > Why? Gives developers an overview of what the object does. Quickly shows what changes have been made to the object.
+
+     
+     ```code
+     	/* bad - no header */
+    	ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
+    
+    
+    	/* good - header added */
+	-- =============================================
+	-- Author:		Andrea Flores
+	-- Create date: 8/30/2016
+	-- Modified:	10/11/2016 - GJS - Added select for those where the PBPSK matches
+	--				11/28/2016 - GJS - Added BnftPlanSK and added inactive/deleted check for PBP items
+	-- Description:	Stored Procedure to search the 
+	-- Tenant Hierarchy by one of the following:
+	--	  Plan Benefit Package Name
+	--    Plan Benefit Package ID
+	--    Line of Business 
+	-- =============================================
+    	ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
+	
+    ```
+    
+
     
 ## Error Handling
 <a name="swallowException"></a><a name="2.1"></a>
