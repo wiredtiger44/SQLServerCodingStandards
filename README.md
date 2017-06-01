@@ -71,6 +71,23 @@ Coding standards for SQL Server development
     END
     ```
 
+
+<a name="UseStatements"></a><a name="1.4"></a>
+  - [1.4](#useStatements) **Use Statements in functions and stored procedures**: USE and the database name should begin all stored procs and functions. In most cases the database name should not be hardcoded anywhere else in the object (Exception: if you are referring to another database)
+
+    > Why? Makes it very specific what database the object is for. Easier for maintenance. Less confusion.
+
+     ```code
+     /* bad - no USE statement */
+    ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
+    
+    
+    /* good - no USE statement */
+    USE BenefitPlan
+    ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
+    
+    ```
+    
 ## Error Handling
 <a name="swallowException"></a><a name="2.1"></a>
   - [2.1](#swallowException) **Don't Swallow Exceptions**: Don't swallow exceptions without handling or logging them.
