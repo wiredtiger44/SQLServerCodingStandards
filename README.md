@@ -208,31 +208,38 @@ Coding standards for SQL Server development
 
     > Why? Excessive blanks lines are inconsistent and annoying.
     
-    ```code
-    /* bad - several blank lines for separation */
-    string benefitPlanType = "Medical";
-    string benefitPlanType2 = "Medical2";
-    
-    
-    
-    
-    
-    
-    return benefitPlantype + benefitPlanType2;
-    
-    /* good - only one blank line for separation */
-    string benefitPlanType = "Medical";
-    string benefitPlanType2 = "Medical2";
+	```code
+	/* bad - excessive blank lines */
+	DECLARE @LobSK BIGINT
+	
+	
+	
+	
+	
+	SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
 
-    return benefitPlantype + benefitPlanType2;
-    ```
 
-<a name="UseVisualStudioFormatDocument"></a><a name="4.5"></a>
-  - [4.5](#UseVisualStudioFormatDocument) **Use Visual Studio Format Document**: Use Visual Studio Format Document functionality (Ctrl + K, Ctrl + D) to format files. 
 
-    > Why? Ensures consistent formatting of the code levels. 
 
-a name="RemoveUnusedCode"></a><a name="4.6"></a>
+
+	SELECT	BnftPlan.BnftPlanSK
+	FROM	BnftPlan
+	
+	
+	
+	
+	WHERE	BnftPlan.LOBSK = @LobSK
+	
+	/* good - no excessive blank lines */
+	DECLARE @LobSK BIGINT
+	SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
+
+	SELECT	BnftPlan.BnftPlanSK
+	FROM	BnftPlan
+	WHERE	BnftPlan.LOBSK = @LobSK
+	```
+
+<a name="RemoveUnusedCode"></a><a name="4.5"></a>
   - [4.6](#RemoveUnusedCode) **Remove Unused Code**: Code that is no longer used should be removed. Unused references should be cleaned up.
 
     > Why? Code that no longer is used still may need to be maintained. Less confusion if code is removed.
@@ -242,30 +249,3 @@ a name="RemoveUnusedCode"></a><a name="4.6"></a>
   - [5.1](#CleanReadableCodeLessComments) **Clean Readable Code Less Comments**: Write clean, readable, code in such a way that it doesn’t need comments to understand.
 
     > Why? Comments are not a substitute for clean, readable, efficient code.
-
-
-<a name="XMLDocumentation"></a><a name="5.2"></a>
-  - [5.2](#XMLDocumentation) **XML Documentation for API End Points**: For controllers, add XML documentation to each API endpoint with “///”. Describe what the API endpoint expects and what it returns.
-
-    > Why? Consumers of the API will have documentation about what and how an API works.
-    
-    ```code
-    /* bad - no XML Documentation */
-    [HttpGet]
-    public IHttpActionResult Search(string bnftName = null, string bnftCode = null, long? svcTypeSK = null)
-    {
-    }
-    
-    /* good - XML documentation documenting method */
-    /// <summary>
-    /// Benefit Definition Search
-    /// </summary>
-    /// <param name="bnftName">the bnft name</param>
-    /// <param name="bnftCode">the bnft Code</param>
-    /// <param name="svcTypeSK">the Service Type SK</param>
-    /// <returns>list of Benefits with their optional Service Types</returns>
-    [HttpGet]
-    public IHttpActionResult Search(string bnftName = null, string bnftCode = null, long? svcTypeSK = null)
-    {
-    }
-    ```
