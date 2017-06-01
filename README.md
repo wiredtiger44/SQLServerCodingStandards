@@ -18,7 +18,7 @@ Coding standards for SQL Server development
 <a name="Magic"></a><a name="1.2"></a>
   - [1.2](#Magic) **No Magic Numbers and Strings**: Magic numbers or magic strings should be avoided if at all possible. A constant should be setup to represent the number or string.
 
-    > Why? The meaning of a magic number or magic string can get lost over time. A constant or enum is clearer and ensures that if a change needs to be made it happens in only one spot 
+    > Why? The meaning of a magic number or magic string can get lost over time. A constant is clearer and ensures that if a change needs to be made it happens in only one spot 
 
     ```code
 	/* bad  */
@@ -28,7 +28,7 @@ Coding standards for SQL Server development
     
 	/* good */
 	DECLARE @LobSK BIGINT
-	SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
+	SELECT @LobSK = LobSK FROM Lob WHERE LOBName = 'HIX'
 
 	SELECT	BnftPlan.BnftPlanSK
 	FROM	BnftPlan
