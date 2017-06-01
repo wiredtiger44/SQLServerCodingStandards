@@ -187,7 +187,7 @@ Coding standards for SQL Server development
 <a name="NoCommentedCode"></a><a name="4.2"></a>
   - [4.2](#NoCommentedCode) **No Commented Code**: Commented code should not be checked in. 
 
-    > Why? Commented code can be confusing. History of code is kept in source control so commented code is not necessary. Comments that descirbe the functionality are still encouraged. 
+    > Why? Commented code can be confusing. History of code is kept in source control so commented code is not necessary. Comments that describe the functionality are still encouraged. 
 
     ```code
 	/* bad - commented code isn't removed */
