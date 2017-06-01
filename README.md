@@ -155,11 +155,11 @@ Coding standards for SQL Server development
     > Why? Standardizing method names helps differentiate them from other types of objects. 
 
     ```code
-    /* bad - name does not start with fn and does not start with verb */
-   ALTER FUNCTION [dbo].[Split] 
-    
-    /* good - name does start with fn and does start with verb */
-   ALTER FUNCTION [dbo].[fnSplitString] 
+	/* bad - name does not start with fn and does not start with verb */
+	ALTER FUNCTION [dbo].[Split] 
+
+	/* good - name does start with fn and does start with verb */
+	ALTER FUNCTION [dbo].[fnSplitString] 
     ```
     
 ## Code Styling
