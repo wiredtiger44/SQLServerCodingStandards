@@ -150,12 +150,12 @@ Coding standards for SQL Server development
     ```
 
 <a name="StoredProcedureNames"></a><a name="3.3"></a>
-  - [3.3](#storedProcedureNames) **Stored Procedure names**: Stored Procedure names should be prefixed with "sp" (no underscore). Names should start with main table or object being referenced in rpcedure. 
+  - [3.3](#storedProcedureNames) **Stored Procedure names**: Stored Procedure names should be prefixed with "sp" (no underscore). Names should start with main table or object being referenced in procedure. 
 
     > Why? Standardizing names helps differentiate them from other types of objects. 
 
     ```code
-    /* bad - name does not start with sp. Doesn't reference main table */
+    /* bad - name does not start with sp. Doesn't reference main table.  */
      ALTER Procedure [dbo].[Search] @BnftPlanSK BIGINT= NULL
     
     /* good - name does start with sp. Does reference main table */
@@ -166,7 +166,7 @@ Coding standards for SQL Server development
     ```
     
     <a name="Function names"></a><a name="3.4"></a>
-  - [3.4](#functionNames) **Function Names**: Functions should be prefixed with “fn” (no underscore). They should start with a verb.  
+  - [3.4](#functionNames) **Function Names**: Functions should be prefixed with “fn”. They should start with a verb.  
 
     > Why? Standardizing method names helps differentiate them from other types of objects. 
 
