@@ -174,23 +174,29 @@ Coding standards for SQL Server development
     > Why? Commented code can be confusing. History of code is kept in source control so commented code is not necessary. Comments that descirbe the functionality are still encouraged. 
 
     ```code
-    /* bad - a bunch of commented code */
-    //string mmm = "Medical Plan";
-    //int mmm = 1;
-    
-    string benefitPlanTypeMedical = "Medical Plan";
-    //if (mmm == "Medical plan");
-    //if (mmm == 1);
-    if (bnftPlanType == benefitPlanTypeMedical)
-    {
-    }
-    
-    /* good - name is representative of the variables representation */
-    // check to see if the benefit plan type is Medical Plan
-    string benefitPlanTypeMedical = "Medical Plan";
-    if (bnftPlanType == benefitPlanTypeMedical)
-    {
-    }
+	/* bad - commented code isn't removed */
+	DECLARE @LobSK BIGINT
+	//DECLARE @LobName varchar(20)
+	//DECLARE @LobSk INT
+	SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
+	//SELECT @LobSK = LobSK WHERE LOBName = 'Commercial'
+	//SELECT @LobSK = LobSK WHERE LOBSK = 2
+
+	//SELECT *
+	//FROM	BnftPlan
+	//WHERE	BnftPlan.LOBSK = @LobSK
+	
+	SELECT	BnftPlan.BnftPlanSK
+	FROM	BnftPlan
+	WHERE	BnftPlan.LOBSK = @LobSK
+	
+	/* good - commented code is removed */
+	DECLARE @LobSK BIGINT
+	SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
+	
+	SELECT	BnftPlan.BnftPlanSK
+	FROM	BnftPlan
+	WHERE	BnftPlan.LOBSK = @LobSK
     ```
 <a name="TabsOverSpaces"></a><a name="4.3"></a>
   - [4.3](#TabsOverSpaces) **Tabs over Spaces for Indentation**: Use Tab for indentions and not Spaces.
