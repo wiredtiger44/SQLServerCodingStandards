@@ -21,19 +21,19 @@ Coding standards for SQL Server development
     > Why? The meaning of a magic number or magic string can get lost over time. A constant or enum is clearer and ensures that if a change needs to be made it happens in only one spot 
 
     ```code
-    /* bad  */
-    SELECT	BnftPlan.BnftPlanSK
-		FROM	BnftPlan
-		WHERE	BnftPlan.LOBSK = 2
+	/* bad  */
+	SELECT	BnftPlan.BnftPlanSK
+	FROM	BnftPlan
+	WHERE	BnftPlan.LOBSK = 2
     
-    /* good */
-    DECLARE @LobSK BIGINT
-    SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
-    
-    SELECT	BnftPlan.BnftPlanSK
-		FROM	BnftPlan
-		WHERE	BnftPlan.LOBSK = @LobSK
-    ```
+	/* good */
+	DECLARE @LobSK BIGINT
+	SELECT @LobSK = LobSK WHERE LOBName = 'HIX'
+
+	SELECT	BnftPlan.BnftPlanSK
+	FROM	BnftPlan
+	WHERE	BnftPlan.LOBSK = @LobSK
+	```
     
     <a name="InvalidParameters"></a><a name="1.3"></a>
   - [1.3](#InvalidParameters) **Invalid Parameters**: Handle invalid parameter values early in methods.
@@ -47,12 +47,12 @@ Coding standards for SQL Server development
     AS
     BEGIN
 
-    SELECT	
-				BnftPlan.BnftPlanSK
-				,BnftPlan.BnftPlanID
-				,BnftPlan.BnftPlanName
-		FROM	BnftPlan
-		WHERE	BnftPlan.BnftPlanSK = @BnftPlanSK
+	SELECT	
+			BnftPlan.BnftPlanSK
+			,BnftPlan.BnftPlanID
+			,BnftPlan.BnftPlanName
+	FROM	BnftPlan
+	WHERE	BnftPlan.BnftPlanSK = @BnftPlanSK
     
     /* good - invalid parameter is handled */
     ALTER Procedure [dbo].[spBenefitPlanSearch] @BnftPlanSK BIGINT= NULL
